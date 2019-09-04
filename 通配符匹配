@@ -1,0 +1,28 @@
+class Solution {
+public:
+    bool isMatch(string s, string p) {
+        bool result;
+        const long n=s.length();
+        const long m=p.length();
+        bool judge[n+1][m+1]={0};
+        judge[0][0]=true;
+        for(long i=1;i<=m;i++)
+        {
+            judge[0][i]=judge[0][i-1]&&p[i-1]=='*';
+        }
+        for(long i=1;i<=n;i++)
+            for(long j=1;j<=m;j++)
+            {
+                if(p[j-1]==s[i-1]||p[j-1]=='?')
+                {
+                    judge[i][j]=judge[i-1][j-1];
+                }
+                if(p[j-1]=='*')
+                {
+                    
+                    judge[i][j]=(judge[i][j-1]||judge[i-1][j]);
+                }
+            }
+        return judge[n][m];
+    }
+};
