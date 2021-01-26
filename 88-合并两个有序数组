@@ -1,0 +1,37 @@
+class Solution {
+    public void merge(int[] nums1, int m, int[] nums2, int n) {
+        int a = m-1;
+        int b = n-1;
+        int position=m+n-1;
+        while(a>=0||b>=0)
+        {
+            if(a<0)
+            {
+                for(int i = b;i>=0;i--)
+                {
+                    nums1[position]=nums2[i];
+                    position-=1;
+                    
+                }
+                break;
+            }
+            else if(b<0)
+            {
+                break;
+            }
+            if(nums1[a]>=nums2[b])
+            {
+                nums1[position]=nums1[a];
+                position-=1;
+                a-=1;
+            }
+            else
+            {
+                nums1[position]=nums2[b];
+                position-=1;
+                b-=1;
+            }
+        }
+
+    }
+}
