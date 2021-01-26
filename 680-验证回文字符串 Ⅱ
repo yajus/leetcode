@@ -1,0 +1,42 @@
+class Solution {
+    public boolean validPalindrome(String s) {
+        int count = 0;
+        int start = 0;
+        int end = s.length()-1;
+        char s1[] = s.toCharArray();
+        while(start<=end)
+        {
+            if(s1[start] == s1[end])
+            {
+                start = start + 1;
+                end = end -1;
+            }
+            else{
+                return (validsubPalindrome(s,start+1,end)||validsubPalindrome(s,start,end-1));
+            
+        }
+    }
+         
+        return true;
+
+    }
+    private boolean  validsubPalindrome(String s,int i,int j)
+    {
+        boolean judge = true;
+        char s1[] = s.toCharArray();
+        while(i<=j)
+        {
+            if(s1[i] == s1[j])
+            {
+                i = i + 1;
+                j = j -1;
+            }
+            else
+            {
+                judge = false;
+                break;
+            }
+        }
+        return judge;
+    }
+}

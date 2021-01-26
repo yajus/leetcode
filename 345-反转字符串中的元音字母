@@ -1,0 +1,46 @@
+class Solution {
+    private final static HashSet<Character> s1 = new HashSet<>(
+        Arrays.asList('a', 'e', 'i', 'o', 'u', 'A', 'E', 'I', 'O', 'U'));
+
+    public String reverseVowels(String s) {
+        char result[] = s.toCharArray();
+        int end = s.length()-1;
+        int start = 0;
+        char deliver;
+        while(start<=end)
+        {
+            char ss = result[start];
+            char es = result[end];
+
+            if(s1.contains(ss))
+            {
+                if(s1.contains(es))
+                {
+                    deliver = ss;
+                    result[start] = es;
+                    result[end] = deliver;
+                    start = start + 1;
+                    end = end - 1;
+                }
+                else
+                {
+                    end = end-1;
+                }
+            }
+            else
+            {
+                if(s1.contains(es))
+                {
+                    start = start +1;
+
+                }
+                else 
+                {
+                    start = start + 1;
+                    end = end - 1;
+                }
+            }
+        }
+        return new String(result);
+    }
+}

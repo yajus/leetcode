@@ -1,0 +1,26 @@
+class Solution {
+    public boolean judgeSquareSum(int c) 
+    {
+        boolean result = false;
+        int start = 0;
+        int end = (int)Math.sqrt(c);
+        while(start<=end)
+        {
+            int judge = start*start+end*end;
+            if(c == judge)
+            {
+                result = true;
+                break;
+            }
+            else if(judge < c)
+            {
+                start = start+1;
+            }
+            else
+            {
+                end = end-1;
+            }
+        }
+        return result;
+    }
+}
