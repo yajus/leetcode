@@ -1,0 +1,41 @@
+class Solution {
+    public String findLongestWord(String s, List<String> d) {
+        String longestWord = "";
+        for(String substr:d)
+        {
+            if(substr.length()<longestWord.length()||((substr.length()==longestWord.length())&&(longestWord.compareTo(substr)<0)))
+            {
+                continue;
+            }
+            else
+            {
+                if(substring(substr,s))
+                {
+                        longestWord=substr;            
+                }
+            }
+        }
+        return longestWord;
+    }
+    private boolean substring(String s1,String s2)
+    {
+        //s1是要被匹配的序列，s2是总序列
+        int a=s1.length();
+        int b=s2.length();
+        int j=0;
+        int i=0;
+        while(i!=a&&j!=b)
+        {
+            if(s1.charAt(i)==s2.charAt(j))
+            {
+                i++;
+                j++;
+            }
+            else
+            {
+                j++;
+            }
+        }
+        return(i==a);
+    }
+}
