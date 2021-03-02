@@ -1,4 +1,122 @@
-bool canWinNim(int n){
-    return !(n%4==0);
+//O(n*k)
+class Solution {
+    public int findKthLargest(int[] nums, int k) {
+        int length=nums.length-1;
+        for(int i = 0;i<k;i++)
+        {
+            fun1(nums,length-i,length-i);
+            Swap(nums,length-i);
+        }
+        return nums[length-k+1];
+
+
+    }
+    private void fun1(int[] nums,int k,int l)
+    {
+        int tmp;
+        for(int i = (l-1)/2;i>=0;i--)
+        {
+            if(2*i+1<=k&&nums[i]<nums[2*i+1])
+            {
+               tmp = nums[2*i+1];
+               nums[2*i+1]=nums[i];
+               nums[i]=tmp;
+            //    if((2*(2*i+1)+1<=k&&nums[2*i+1]<nums[2*(2*i+1)+1])||(2*(2*i+1)+2<=k&&nums[2*i+1]<nums[2*(2*i+1)+2]))
+            //    fun1(nums,k,l);
+            }
+            if(2*i+2<=k&&nums[i]<nums[2*i+2])
+            {44
+                tmp = nums[i];
+                nums[i]=nums[2*i+2];
+                nums[2*i+2]=tmp;
+            //     if((2*(2*i+2)+1<=k&&nums[2*i+2]<nums[2*(2*i+2)+1])||(2*(2*i+2)+2<=k&&nums[2*i+2]<nums[2*(2*i+2)+2]))
+            //    fun1(nums,k,l);
+            }
+        }
+    }
+
+    private void Swap(int[] nums,int l)
+    {
+        int tmp;
+        tmp=nums[0];
+        nums[0]=nums[l];
+        nums[l]=tmp;
+    }
 }
 
+//O(k*log(n))
+class Solution {
+    public int findKthLargest(int[] nums, int k) {
+        int length=nums.length-1;
+        fun1(nums,length,length);
+        Swap(nums,length);
+        for(int i = 1;i<k;i++)
+        {
+            fun2(nums,0,length-i);
+            Swap(nums,length-i);
+        }
+        return nums[length-k+1];
+
+
+    }
+    private void fun1(int[] nums,int k,int l)
+    {
+        int tmp;
+        for(int i = (l-1)/2;i>=0;i--)
+        {
+            if(2*i+1<=k&&nums[i]<nums[2*i+1])
+            {
+               tmp = nums[2*i+1];
+               nums[2*i+1]=nums[i];
+               nums[i]=tmp;
+               fun2(nums,2*i+1,k);
+            //    if((2*(2*i+1)+1<=k&&nums[2*i+1]<nums[2*(2*i+1)+1])||(2*(2*i+1)+2<=k&&nums[2*i+1]<nums[2*(2*i+1)+2]))
+            //    fun1(nums,k,l);
+            }
+            if(2*i+2<=k&&nums[i]<nums[2*i+2])
+            {
+                tmp = nums[i];
+                nums[i]=nums[2*i+2];
+                nums[2*i+2]=tmp;
+                fun2(nums,2*i+2,k);
+            //     if((2*(2*i+2)+1<=k&&nums[2*i+2]<nums[2*(2*i+2)+1])||(2*(2*i+2)+2<=k&&nums[2*i+2]<nums[2*(2*i+2)+2]))
+            //    fun1(nums,k,l);
+            }
+        }
+    }
+    private void fun2(int[] nums,int p,int k)
+    {
+        int point = p;
+        while(point*2+1<=k&&point*2+2<=k)
+        {
+            int max;
+            if(nums[point*2+1]>nums[point*2+2])
+                max = point*2+1;
+            else
+                max = point*2+2;
+            
+            if(nums[max]>nums[point])
+            {
+            int tmp = nums[max];
+            nums[max] = nums[point];
+            nums[point]=tmp;
+            point = max;
+            }
+            else
+            break;
+        }
+        if(point*2+1<=k&&nums[point]<nums[point*2+1])
+        {
+            int tmp = nums[point*2+1];
+            nums[point*2+1] = nums[point];
+            nums[point] = tmp;
+        }
+    }
+    private void Swap(int[] nums,int l)
+    {
+        int tmp;
+        tmp=nums[0];
+        nums[0]=nums[l];
+        nums[l]=tmp;
+    }
+}
