@@ -1,0 +1,15 @@
+class Solution {
+    public int[][] reconstructQueue(int[][] people) {
+        if(people==null||people.length==0)
+        {
+            return new int[0][0];
+        }
+        Arrays.sort(people,(o1,o2)-> {return o1[0]==o2[0]?o1[1]-o2[1]:o2[0]-o1[0];});
+        ArrayList<int[]> queue = new ArrayList<int[]>();
+        for(int i=0;i<people.length;i++)
+        {
+            queue.add(people[i][1],people[i]);
+        }
+        return queue.toArray(new int[people.length][2]);
+    }
+}
