@@ -1,0 +1,21 @@
+class Solution {
+    public int findRepeatNumber(int[] nums) {
+        for(int point = 0;point<nums.length; point++)
+        {
+            while(point!=nums[point])
+            {
+                if(nums[nums[point]]==nums[point])
+                {
+                    return nums[point];
+                }  
+                
+                
+                 int a = nums[point];
+                 nums[point]=nums[a];
+                 nums[a]=a;   
+            
+            }
+        }
+        return -1;
+    }
+}

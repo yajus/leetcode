@@ -1,0 +1,31 @@
+class Solution {
+    public boolean findNumberIn2DArray(int[][] matrix, int target) {
+        if(matrix.length==0||matrix==null)
+        {
+            return false;
+        }
+        int r = matrix.length-1;
+        int a = matrix[0].length-1;
+        int pointr = 0;
+        int pointa = a;
+        while(pointa>=0&&pointr<=r)
+        {
+        if(matrix[pointr][pointa]==target)
+        {
+            return true;
+        }
+        else if(matrix[pointr][pointa]>target)
+        {
+            pointa --;
+            continue;
+        }
+        else
+        {
+            pointr++;
+            continue;
+        }
+        }
+        return false;
+    }
+
+}

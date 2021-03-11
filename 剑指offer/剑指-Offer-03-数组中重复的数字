@@ -1,0 +1,46 @@
+
+//在一个长度为 n+1 的数组 nums 里的所有数字都在 1～n 的范围内,所以数组中至少有一个数字是重复的，但不知道有几个数字重复了，也不知道每个数字重复了几次。请找出数组中任意一个重复的数字。
+
+class Solution {
+    public int findRepeatNumber(int[] nums) {
+        if(nums==null||nums.length==0)
+        return -1;
+        int start = 0;
+        int end = nums.length-1;
+        while(end>=start)
+        {
+        int mid = (end+start)/2;
+        int count = counttimes(nums,nums.length,start,mid);
+        if(end==start)
+        {
+            if(count>1)
+            return start;
+            else
+            break;
+        }
+        if(count>(mid-start+1))
+        {
+            end = mid;
+        }
+        else
+        {
+            start = mid+1;
+        }
+        }
+        return -1;
+    }
+    private int counttimes(int[] nums,int length,int start,int end)
+    {
+        if(nums==null)
+        return 0;
+        int count=0;
+        for(int i=0;i<length;i++)
+        {
+            if(nums[i]>=start&&nums[i]<=end)
+            {
+                count++;
+            }
+        }
+        return count;
+    }
+}
