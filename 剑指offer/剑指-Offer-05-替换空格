@@ -1,0 +1,30 @@
+class Solution {
+    public String replaceSpace(String s) {
+        // char[] c = s.toCharArray();
+        int count=0;
+        for(int i = 0;i<s.length();i++)
+        {
+            if(s.charAt(i)==' ')
+            count++;
+        }
+        int num = s.length()+2*count;
+        char[] a = new char[num];
+        num--;
+        for(int i = s.length()-1;i>=0;i--)
+        {
+            
+            if(count>0&&s.charAt(i)==' ')
+            {
+                a[num--]='0';
+                a[num--]='2';
+                a[num--]='%';
+                count--;
+            }
+            else
+            {
+                a[num--]=s.charAt(i);
+            }
+        }
+        return String.valueOf(a);
+    }
+}
