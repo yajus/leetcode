@@ -1,0 +1,42 @@
+class Solution {
+    public int minArray(int[] numbers) {
+        int a = 0;
+        int b = numbers.length-1;
+        int mid;
+        while(numbers[a]>=numbers[b])
+        {
+            mid = (a+b)/2;
+            if(b-a==1)
+            {
+                return numbers[a]>numbers[b]?numbers[b]:numbers[a];
+             }
+             if(numbers[a]==numbers[b]&&numbers[mid]==numbers[a])
+             {
+                 return Inrange(numbers,a,b);
+             }
+             if(numbers[mid]<=numbers[b])
+             {
+                 b=mid;
+                 continue;
+             }
+             if(numbers[mid]>=numbers[a])
+             {
+                 a=mid;
+                 continue;
+             }
+        }
+        return numbers[a];
+    }
+    int  Inrange(int[] numbers,int a,int b)
+    {
+        int min =99999999;
+        for(int i = a;i<=b;i++)
+        {
+            if(numbers[i]<min)
+            {
+                min = numbers[i];
+            }
+        }
+        return min;
+    }
+}
