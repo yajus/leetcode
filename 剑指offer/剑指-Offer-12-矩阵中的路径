@@ -1,0 +1,42 @@
+class Solution {
+    public boolean exist(char[][] board, String word) {
+        int rows,columns;
+        rows = board.length;
+        columns = board[0].length;
+        int[][] visited =  new int[rows][columns];
+        int mark = 0;
+        for(int i = 0;i<rows;i++)
+        {
+            for(int j = 0;j<columns;j++)
+            {
+
+                if(search(board,word,i,j,rows,columns,visited,mark))
+                {
+                    return true;
+                }
+            }
+        }
+        return false;
+
+    }
+
+    boolean search(char[][] board,String word,int i ,int j,int rows,int columns,int[][] visited,int mark)
+    {
+        if(word.length()==0||mark==word.length())
+        return true;
+        boolean judge=false;
+        if(0<=i&&i<rows&&0<=j&&j<columns&&visited[i][j]==0&&board[i][j]==word.charAt(mark))
+        {
+            mark++;
+            visited[i][j]=1;
+            judge = search(board,word,i+1,j,rows,columns,visited,mark)||search(board,word,i-1,j,rows,columns,visited,mark)||search(board,word,i,j+1,rows,columns,visited,mark)||search(board,word,i,j-1,rows,columns,visited,mark);
+            if(!judge)
+            {
+            mark--;
+            visited[i][j]=0;
+            }
+        }
+        
+        return judge;
+    }
+}
