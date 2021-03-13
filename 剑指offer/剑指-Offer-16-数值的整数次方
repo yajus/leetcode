@@ -1,0 +1,34 @@
+// 请问：为什么要把其中的n换成long类型。
+//因为32位int是补码形式，正数是和原码相同，范围是0到2的32次方-1，但是对于负数，需要反码+1，范围是2的32次方到0，负数要比正数多一个数字。如果传进来的int刚好是负2的32次方，取相反数之后就超过int32类型的取值范围了，所以需要用long来扩大取值范围。不好意思啊，评论区数学公式不太好打。。。
+class Solution {
+    public double myPow(double x, int n) {
+        long b = n;
+        if(x==0.0&&b<0)
+        {
+            return 0.0;
+        }
+        double result;
+        if(b<0)
+        {
+            b=-b;
+            result = PowWithUnSignedExponent(x,b);
+            return 1.0/result;
+        }
+        else
+            return PowWithUnSignedExponent(x,b);
+    }
+
+    double PowWithUnSignedExponent(double a ,long n)
+    {
+        double result;
+        if(n==1)
+        return a;
+        if(n==0)
+        return 1;
+        result = PowWithUnSignedExponent(a,n/2);
+        result = result*result; 
+        if(n%2==1)
+        result*=a;
+        return result;
+    }
+}

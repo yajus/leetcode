@@ -1,0 +1,45 @@
+class Solution {
+    public int movingCount(int m, int n, int k) {
+        int[][]  place = new int[m][n];
+        int[][] visited = new int[m][n];
+        int i=0;
+        int j=0;
+        return move(m,n,i,j,visited,k);
+
+    }
+    int move(int m,int n,int i,int j,int[][] visited,int k)
+    {
+        int count = 0;
+        if(check(m,n,i,j,visited,k))
+        {
+            visited[i][j]=1;
+            count = 1+move(m,n,i-1,j,visited,k)+move(m,n,i+1,j,visited,k)+move(m,n,i,j-1,visited,k)+move(m,n,i,j+1,visited,k);
+        }
+        return count;
+
+    }
+    boolean check(int m,int n,int i,int j,int[][] visited,int k)
+    {
+        if(0<=i&&i<m&&j>=0&&j<n&&visited[i][j]==0&&judge(i,j)<=k)
+        {
+            return true;
+        }
+        return false;
+
+    }
+    int judge(int i,int j)
+    {
+        int sum=0;
+        while(i>0)
+        {
+            sum+=i%10;
+            i=i/10;
+        }
+        while(j>0)
+        {
+            sum+=j%10;
+            j=j/10;
+        }
+        return sum;
+    }
+}
