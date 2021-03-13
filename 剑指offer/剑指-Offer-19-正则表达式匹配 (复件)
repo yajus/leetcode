@@ -1,0 +1,48 @@
+class Solution {
+    public boolean isMatch(String s, String p) {
+        if(s==null||p==null)
+        return false;
+        // if(s.length()==0)
+        // return true;
+        return match(0,0,s,p);
+    }
+    boolean match(int a,int b,String s,String p)
+    {
+        if(a<s.length()&&b>=p.length())
+        return false;
+        if(a>=s.length())
+        {
+            while(b<p.length())
+            {
+                if(b+1<p.length()&&p.charAt(b+1)=='*')
+                {
+                    b+=2;
+                    continue;
+                }
+                else 
+                return false;
+            }
+            if(b>=p.length())
+            return true;
+        }
+        // if(a!=s.length()&&b==p.length())
+        // return false;
+        if(b+1<p.length()&&p.charAt(b+1)=='*')
+        {
+            if(s.charAt(a)==p.charAt(b)||(p.charAt(b)=='.'&&a!=s.length()))
+            {
+                return match(a+1,b+2,s,p)||match(a+1,b,s,p)||match(a,b+2,s,p);
+            }
+            else
+            {
+                return match(a,b+2,s,p);
+            }
+        }
+
+        if(s.charAt(a)==p.charAt(b)||(p.charAt(b)=='.'&&a<s.length()))
+        {
+            return match(a+1,b+1,s,p);
+        }
+        return false;
+    }
+}

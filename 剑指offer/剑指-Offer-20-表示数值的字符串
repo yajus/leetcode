@@ -1,0 +1,53 @@
+class Solution {
+    int point;
+    public boolean isNumber(String s) {
+        if(s.length()==0||s==null)
+        return false;
+        boolean result=true;
+        boolean deliver;
+        point = 0;
+        while(s.length()!=point)
+        {
+            if(s.charAt(point)==' ')
+            point++;
+            else
+            break;
+        }
+        deliver = ScanInteger(s);
+        result = result&&deliver;
+        if(point<s.length()&&s.charAt(point)=='.')
+        {
+            point++;
+            deliver = ScanUnsignedInteger(s);
+            result = result||deliver;
+        }
+        if(point<s.length()&&(s.charAt(point)=='E'||s.charAt(point)=='e'))
+        {
+            point++;
+            deliver = ScanInteger(s);
+            result = result&&deliver;
+        }
+        while(s.length()!=point)
+        {
+            if(s.charAt(point)==' ')
+            point++;
+            else
+            break;
+        }
+        result = result&&(point==s.length());
+        return result;
+    }
+    boolean ScanUnsignedInteger(String s)
+    {
+        int a = point;
+        while(point<s.length()&&s.charAt(point)<='9'&&s.charAt(point)>='0')
+        point++;
+        return point>a;
+    }
+    boolean ScanInteger(String s)
+    {
+        if(point<s.length()&&(s.charAt(point)=='+'||s.charAt(point)=='-'))
+        point++;
+        return ScanUnsignedInteger(s);
+    }
+}
