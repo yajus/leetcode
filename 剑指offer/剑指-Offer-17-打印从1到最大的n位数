@@ -1,0 +1,32 @@
+class Solution {
+    int count;
+    
+    public int[] printNumbers(int n) {
+        int[] result = new int[(int)Math.pow(10,n)-1];
+        count = 0;
+        for(int i=1;i<=n;i++)
+        { 
+            for(char j = '1';j<='9';j++)
+            {
+                char[] c = new char[i];
+                c[0]=j;
+                recursion(c,i,0,result);
+            }
+        }
+        return result;
+    }
+
+    void recursion(char[]c,int len,int position,int [] result)
+    {
+        if(position==len-1)
+        {
+            result[count++]=Integer.parseInt(String.valueOf(c));
+            return;
+        }
+        for(int i = 0;i<=9;i++)
+        {
+            c[position+1]=(char)('0'+i);
+            recursion(c,len,position+1,result);     
+        }
+    }
+}
