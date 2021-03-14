@@ -1,0 +1,31 @@
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode(int x) { val = x; }
+ * }
+ */
+class Solution {
+    public ListNode getKthFromEnd(ListNode head, int k) {
+        if(head == null)
+        return null;
+        // if(k==0)
+        // return null;
+        int distance = k;
+        ListNode a,b;
+        a = head;
+        b=null;
+        while(a!=null)
+        {
+            a=a.next;
+            if(b!=null)
+            b=b.next;
+            distance--;
+            if(distance == 0)
+            b=head;
+            
+        }
+        return b;
+    }
+}
