@@ -1,0 +1,29 @@
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode(int x) { val = x; }
+ * }
+ */
+class Solution {
+    TreeNode result ;
+    void exchange(TreeNode Node)
+    {
+        if(Node==null)
+        return;
+        if(Node.left==null&&Node.right==null)
+        return;
+        TreeNode tmp = Node.left;
+        Node.left = Node.right;
+        Node.right = tmp;
+        exchange(Node.left);
+        exchange(Node.right);
+    }
+    public TreeNode mirrorTree(TreeNode root) {
+        exchange(root);
+        return root;
+    }
+
+}
